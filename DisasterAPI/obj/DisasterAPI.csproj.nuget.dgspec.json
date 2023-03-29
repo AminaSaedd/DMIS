@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Desktop\\ReactProjects\\DistasterMIS\\DisasterAPI\\DisasterAPI.csproj": {}
+    "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Desktop\\ReactProjects\\DistasterMIS\\DisasterAPI\\DisasterAPI.csproj": {
+    "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Desktop\\ReactProjects\\DistasterMIS\\DisasterAPI\\DisasterAPI.csproj",
+        "projectUniqueName": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
         "projectName": "DisasterAPI",
-        "projectPath": "C:\\Users\\User\\Desktop\\ReactProjects\\DistasterMIS\\DisasterAPI\\DisasterAPI.csproj",
-        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Desktop\\ReactProjects\\DistasterMIS\\DisasterAPI\\obj\\",
+        "projectPath": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
+        "packagesPath": "C:\\Users\\Mustapha Xoodiye\\.nuget\\packages\\",
+        "outputPath": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mustapha Xoodiye\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +96,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
