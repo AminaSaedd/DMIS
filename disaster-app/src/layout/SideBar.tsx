@@ -51,18 +51,6 @@ const SideBar = () => {
                   </svg>
                 </div>
               </a>
-              <ul
-                className="collapse submenu list-unstyled show"
-                id="dashboard"
-                data-parent="#accordionExample"
-              >
-                <li className="active">
-                  <a href="index.html"> Sales </a>
-                </li>
-                <li>
-                  <a href="index2.html"> Analytics </a>
-                </li>
-              </ul>
             </li>
             <li className="menu">
               <a
