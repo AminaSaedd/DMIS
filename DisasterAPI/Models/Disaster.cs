@@ -20,7 +20,7 @@
         public string LossCost{ get; set; }
         public string reportedBy { get; set; }
         public string Contact { get; set; }
-        public DateTimeOffset Date { get; set; }
+        public DateTimeOffset Date { get; set; } = DateTimeOffset.Now;
        
     }
 }

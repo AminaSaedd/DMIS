@@ -24,17 +24,17 @@ namespace DisasterAPI.Migrations
 
             modelBuilder.Entity("DisasterAPI.Models.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CategoryId");
+                    b.HasKey("id");
 
                     b.ToTable("Categories");
                 });

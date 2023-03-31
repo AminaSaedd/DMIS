@@ -51,6 +51,18 @@ const SideBar = () => {
                   </svg>
                 </div>
               </a>
+              <ul
+                className="collapse submenu list-unstyled show"
+                id="dashboard"
+                data-parent="#accordionExample"
+              >
+                {/* <li className="active">
+                  <a href="index.html"> Sales </a>
+                </li>
+                <li>
+                  <a href="index2.html"> Analytics </a>
+                </li> */}
+              </ul>
             </li>
             <li className="menu">
               <a
@@ -83,7 +95,7 @@ const SideBar = () => {
                     <line x1={1} y1={9} x2={4} y2={9} />
                     <line x1={1} y1={14} x2={4} y2={14} />
                   </svg>
-                  <span>Apps</span>
+                  <span>Categories</span>
                 </div>
                 <div>
                   <svg
@@ -108,7 +120,10 @@ const SideBar = () => {
                 data-parent="#accordionExample"
               >
                 <li>
-                  <a href="apps_chat.html"> Chat </a>
+                  <NavLink to="category/NewCategory">New</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/category/Category"> Display </NavLink>
                 </li>
               </ul>
             </li>
@@ -136,7 +151,7 @@ const SideBar = () => {
                     <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
                     <line x1={12} y1="22.08" x2={12} y2={12} />
                   </svg>
-                  <span>Components</span>
+                  <span>Disaster</span>
                 </div>
                 <div>
                   <svg
@@ -161,58 +176,10 @@ const SideBar = () => {
                 data-parent="#accordionExample"
               >
                 <li>
-                  <a href="component_tabs.html"> Tabs </a>
+                  <NavLink to="disaster/AddDisaster">New</NavLink>
                 </li>
-              </ul>
-            </li>
-            <li className="menu">
-              <a
-                href="#elements"
-                data-toggle="collapse"
-                aria-expanded="false"
-                className="dropdown-toggle"
-              >
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-zap"
-                  >
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                  <span>Elements</span>
-                </div>
-                <div>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-chevron-right"
-                  >
-                    <polyline points="9 18 15 12 9 6" />
-                  </svg>
-                </div>
-              </a>
-              <ul
-                className="collapse submenu list-unstyled"
-                id="elements"
-                data-parent="#accordionExample"
-              >
                 <li>
-                  <a href="element_alerts.html"> Alerts </a>
+                  <NavLink to="disaster/DisastersList">Display</NavLink>
                 </li>
               </ul>
             </li>

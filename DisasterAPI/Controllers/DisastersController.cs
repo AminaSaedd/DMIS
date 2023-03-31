@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DisasterAPI.Data;
 using DisasterAPI.Models;
+using DisasterAPI.DTOs;
 
 namespace DisasterAPI.Controllers
 {
@@ -25,10 +26,10 @@ namespace DisasterAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Disaster>>> GetDisasters()
         {
-          if (_context.Disasters == null)
-          {
-              return NotFound();
-          }
+            if (_context.Disasters == null)
+            {
+                return NotFound();
+            }
             return await _context.Disasters.ToListAsync();
         }
 
@@ -36,10 +37,10 @@ namespace DisasterAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Disaster>> GetDisaster(int id)
         {
-          if (_context.Disasters == null)
-          {
-              return NotFound();
-          }
+            if (_context.Disasters == null)
+            {
+                return NotFound();
+            }
             var disaster = await _context.Disasters.FindAsync(id);
 
             if (disaster == null)
@@ -53,43 +54,63 @@ namespace DisasterAPI.Controllers
         // PUT: api/Disasters/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDisaster(int id, Disaster disaster)
+        public async Task<IActionResult> PutDisaster(int id, EditDisasterDTO editDisaster)
         {
-            if (id != disaster.Id)
+            if (editDisaster is null)
             {
                 return BadRequest();
             }
 
+            var disaster = await _context.Disasters.FirstOrDefaultAsync(e => e.Id == id);
+            if (disaster is null) return NotFound();
+
+            if (disaster == null) return BadRequest();
+
+            disaster.CategoryId = editDisaster.CategoryId;
+            disaster.Description = editDisaster.Description;
+            disaster.TypeOfDisaster = editDisaster.TypeOfDisaster;
+            disaster.District = editDisaster.District;
+            disaster.Neighborhood = editDisaster.Neighborhood;
+
+            await _context.SaveChangesAsync();
             _context.Entry(disaster).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DisasterExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
 
             return NoContent();
         }
 
-        // POST: api/Disasters
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Disaster>> PostDisaster(Disaster disaster)
+    
+    // POST: api/Disasters
+    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+    [HttpPost]
+        public async Task<ActionResult<Disaster>> PostDisaster(PostDisasterDTO record)
         {
           if (_context.Disasters == null)
           {
               return Problem("Entity set 'DisasterDBContext.Disasters'  is null.");
           }
+
+            var disaster = new Disaster
+            {
+                CategoryId = record.CategoryId,
+                Description = record.Description,
+                TypeOfDisaster = record.TypeOfDisaster,
+                District = record.District,
+                Neighborhood = record.Neighborhood,
+                Location = record.Location,
+                CurrentStatus = record.CurrentStatus,
+                remarks = record.remarks,
+                NumberOfDamagedHouses = record.NumberOfDamagedHouses,
+                NumberOfDeaths = record.NumberOfDeaths,
+                NumberOfInjuries = record.NumberOfInjuries,
+                NumberOfSurvivors = record.NumberOfSurvivors,
+                LossCost = record.LossCost,
+                reportedBy = record.reportedBy,
+                Contact = record.Contact
+
+
+            };
+
             _context.Disasters.Add(disaster);
             await _context.SaveChangesAsync();
 
