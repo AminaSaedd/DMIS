@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using DisasterAPI.Data;
 using DisasterAPI.Models;
 using DisasterAPI.DTOs;
+using Microsoft.Extensions.Hosting.Internal;
+using DisasterAPI.Extentions;
+using Microsoft.Extensions.Hosting;
 
 namespace DisasterAPI.Controllers
 {
@@ -16,10 +19,11 @@ namespace DisasterAPI.Controllers
     public class DisastersController : ControllerBase
     {
         private readonly DisasterDBContext _context;
-
-        public DisastersController(DisasterDBContext context)
+        public static IWebHostEnvironment _environment;
+        public DisastersController(DisasterDBContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: api/Disasters
@@ -83,38 +87,91 @@ namespace DisasterAPI.Controllers
     // POST: api/Disasters
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-        public async Task<ActionResult<Disaster>> PostDisaster(PostDisasterDTO record)
+        public async Task<ActionResult<Disaster>> PostDisaster([FromForm] PostDisasterDTO record)
         {
-          if (_context.Disasters == null)
-          {
-              return Problem("Entity set 'DisasterDBContext.Disasters'  is null.");
-          }
-
-            var disaster = new Disaster
+            try
             {
-                CategoryId = record.CategoryId,
-                Description = record.Description,
-                TypeOfDisaster = record.TypeOfDisaster,
-                District = record.District,
-                Neighborhood = record.Neighborhood,
-                Location = record.Location,
-                CurrentStatus = record.CurrentStatus,
-                remarks = record.remarks,
-                NumberOfDamagedHouses = record.NumberOfDamagedHouses,
-                NumberOfDeaths = record.NumberOfDeaths,
-                NumberOfInjuries = record.NumberOfInjuries,
-                NumberOfSurvivors = record.NumberOfSurvivors,
-                LossCost = record.LossCost,
-                reportedBy = record.reportedBy,
-                Contact = record.Contact
+                if (_context.Disasters == null)
+                {
+                    return Problem("Entity set 'DisasterDBContext.Disasters'  is null.");
+                }
+                Logger.LogInfo($"Here is images{record.Images}");
+                var imageList = new List<string>();
+                string newPath = Path.Combine(_environment.WebRootPath, "Images");
 
+                if (!Directory.Exists(newPath))
+                {
+                    Directory.CreateDirectory(newPath);
+                }
+                foreach (var file in record.Images)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
+                        var filePath = Path.Combine(newPath, fileName);
 
-            };
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                        //using var fileStream = new FileStream(Path.Combine(newPath, fileName), FileMode.Create);
+                        //await file.CopyToAsync(fileStream);
 
-            _context.Disasters.Add(disaster);
-            await _context.SaveChangesAsync();
+                        imageList.Add(fileName);
+                    }
+                }
 
-            return CreatedAtAction("GetDisaster", new { id = disaster.Id }, disaster);
+                var disaster = new Disaster
+                {
+                    CategoryId = 1,
+                    Description = record.Description,
+                    TypeOfDisaster = "record.TypeOfDisaster",
+                    District = "record.District",
+                    Neighborhood = "record.Neighborhood",
+                    Location = "record.Location",
+                    CurrentStatus = "record.CurrentStatus",
+                    remarks = "record.remarks",
+                    NumberOfDamagedHouses = "record.NumberOfDamagedHouses",
+                    NumberOfDeaths = "record.NumberOfDeaths",
+                    NumberOfInjuries = "record.NumberOfInjuries",
+                    NumberOfSurvivors = "record.NumberOfSurvivors",
+                    LossCost = " record.LossCost",
+                    reportedBy = "record.reportedBy",
+                    Contact = "record.Contact",
+                    Lat = (double)record.Lat,
+                    Long = (double)record.Long,
+                    Images = imageList
+                    // CategoryId = 1,
+                    //Description = record.Description,
+                    //TypeOfDisaster = record.TypeOfDisaster,
+                    //District = record.District,
+                    //Neighborhood = record.Neighborhood,
+                    //Location = record.Location,
+                    //CurrentStatus = record.CurrentStatus,
+                    //remarks = record.remarks,
+                    //NumberOfDamagedHouses = record.NumberOfDamagedHouses,
+                    //NumberOfDeaths = record.NumberOfDeaths,
+                    //NumberOfInjuries = record.NumberOfInjuries,
+                    //NumberOfSurvivors = record.NumberOfSurvivors,
+                    //LossCost = record.LossCost,
+                    //reportedBy = record.reportedBy,
+                    //Contact = record.Contact,
+                    //Lat = record.Lat,
+                    //Long = record.Long,
+                    //Images = imageList
+
+                };
+
+                _context.Disasters.Add(disaster);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetDisaster", new { id = disaster.Id }, disaster);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
+                throw;
+            }
         }
 
         // DELETE: api/Disasters/5
