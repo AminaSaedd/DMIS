@@ -4,13 +4,14 @@ import 'package:http/http.dart' as http;
 
 class BaseAPI {
   // local host
-  static String baseAPI = "https://localhost:7228/api";
+  // static String baseAPI = "https://localhost:7228/api";
 
   // local IP Address
-  // static String baseAPI = "http://10.0.2.2:5295/api";
+  // static String baseAPI = "http://localhost:5064/api";
 
-  // static String baseAPI = "http://172.32.232.2:8081/api";
+  String baseAPI = "http://10.10.1.2:8081/api";
   String DisasterPath = 'disasters';
+  String CategoriesPath = 'categories';
 
   // var authPath = Uri.parse("$baseAPI/login");
 
@@ -53,7 +54,7 @@ class BaseAPI {
     Map<String, String> header = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer $token',
+      // 'Authorization': 'Bearer $token',
     };
 
     var link = Uri.parse(

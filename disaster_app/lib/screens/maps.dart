@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -17,14 +18,62 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   @override
+  void didChangeDependencies() async {
+    await _getUserLocation();
+    super.didChangeDependencies();
+  }
+
+  late bool _serviceEnabled;
+  late PermissionStatus _permissionGranted;
+
+  Future<void> _getUserLocation() async {
+    Location location = Location();
+
+    // Check if location service is enable
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    // Check if permission is granted
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    final locationData = await location.getLocation();
+    setState(() {
+      _pickedLocation = LatLng(
+        locationData.latitude!,
+        locationData.longitude!,
+      );
+      Marker(
+        markerId: const MarkerId('picked'),
+        position: LatLng(
+          locationData.latitude!,
+          locationData.longitude!,
+        ),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         title: const Text('Pick a location'),
       ),
       body: GoogleMap(
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(37.4219999, -122.0840575),
+        initialCameraPosition: CameraPosition(
+          // target: LatLng(37.4219999, -122.0840575),
+          target: _pickedLocation ?? const LatLng(9.558575, 44.049925),
           zoom: 15,
         ),
         onTap: _selectLocation,

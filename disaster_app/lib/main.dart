@@ -27,9 +27,24 @@ class MyApp extends StatelessWidget {
         title: 'Disaster App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: Colors.blue.shade900,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-              .copyWith(secondary: Colors.yellow.shade300),
+          // Define the default brightness and colors.
+          // brightness: Brightness.dark,
+          primaryColor: Colors.green[400],
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: Colors.green[800], // Your accent color
+          ),
+
+          // Define the default font family.
+          fontFamily: 'Georgia',
+
+          // Define the default `TextTheme`. Use this to specify the default
+          // text styling for headlines, titles, bodies of text, and more.
+          textTheme: const TextTheme(
+            displayLarge:
+                TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
         ),
         initialRoute: Routes.disasterList,
         routes: routes,
