@@ -1,4 +1,5 @@
 using DisasterAPI.Data;
+using DisasterAPI.Extentions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 //dbContextInjection
 builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-
+builder.Services.AddScoped<Logger>();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddDbContext<DisasterDBContext>(options =>
@@ -30,12 +31,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(options =>
-        options.WithOrigins("http://localhost:3000")
+        options.AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader()
-        .AllowCredentials());
+        .AllowAnyHeader());
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapGet("/api/status", () =>
+{
+    return Results.Ok("API is working...");
+});
 app.Run();

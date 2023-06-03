@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {}
+    "D:\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {}
   },
   "projects": {
-    "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {
+    "D:\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
+        "projectUniqueName": "D:\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
         "projectName": "DisasterAPI",
-        "projectPath": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
-        "packagesPath": "C:\\Users\\Mustapha Xoodiye\\.nuget\\packages\\",
-        "outputPath": "D:\\My Staff\\projects\\DMIS\\DisasterAPI\\obj\\",
+        "projectPath": "D:\\projects\\DMIS\\DisasterAPI\\DisasterAPI.csproj",
+        "packagesPath": "C:\\Users\\Baylood\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\DMIS\\DisasterAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Mustapha Xoodiye\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Baylood\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -96,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

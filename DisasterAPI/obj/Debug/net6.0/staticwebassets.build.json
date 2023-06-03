@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "8YnofotHSJWIBRd9BCBpG7a63Moj4rLzVLkYQf6prC4=",
+  "Hash": "fm4soNMFKI+JyHJpGmnqfXVkiSvi3J4kjsHLqKsUcKw=",
   "Source": "DisasterAPI",
   "BasePath": "_content/DisasterAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "DisasterAPI\\wwwroot",
+      "Source": "DisasterAPI",
+      "ContentRoot": "D:\\projects\\DMIS\\DisasterAPI\\wwwroot\\",
+      "BasePath": "_content/DisasterAPI",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

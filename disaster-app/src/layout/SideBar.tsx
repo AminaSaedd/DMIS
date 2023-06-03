@@ -120,10 +120,10 @@ const SideBar = () => {
                 data-parent="#accordionExample"
               >
                 <li>
-                  <a href="apps_chat.html"> New </a>
+                  <NavLink to="category/NewCategory">New</NavLink>
                 </li>
                 <li>
-                  <a href="apps_chat.html"> Display </a>
+                  <NavLink to="/category/Category"> Display </NavLink>
                 </li>
               </ul>
             </li>
@@ -176,10 +176,10 @@ const SideBar = () => {
                 data-parent="#accordionExample"
               >
                 <li>
-                  <a href="component_tabs.html"> New </a>
+                  <NavLink to="disaster/AddDisaster">New</NavLink>
                 </li>
                 <li>
-                  <a href="component_tabs.html"> Display </a>
+                  <NavLink to="disaster/DisastersList">Display</NavLink>
                 </li>
               </ul>
             </li>
